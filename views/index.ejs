@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+<body style="padding: 30px;" >
+    <!-- <H1 style="color: blue;">walcom ya3kouba</H1>
+    <P>ana ya3koba rani habe nte3lem 3fayes yfidouni </P>
+    <div style="width: 40px;height: 40px; background-color: brown;border-radius: 50%;"></div> -->
+   
+    <h1>List Des Doctors </h1>
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin:20px 0;">
+    Add New Doctor
+  </button>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" ">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <!-- ++++++++++++++++++++++++Formuler++++++++++++++++++++ -->
+            <form action="/insert" method="post">
+                <fieldset>
+                  <legend>Add New Doctor</legend>
+                  <div class="mb-3">
+                    <label for="disabledTextInput" class="form-label">Enter Full Name</label>
+                    <input type="text" id="disabledTextInput" class="form-control" name="fullname" placeholder="Enter Full Name">
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label for="disabledSelect" class="form-label">Work Day</label>
+                    <select id="disabledSelect" class="form-select" name="day">
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                    </select>
+                  </div>
+                  <legend>Speciality</legend>
+                  <div class="mb-3">
+                    <label for="disabledTextInput" class="form-label">Speciality</label>
+                    <input type="text" id="disabledTextInput" class="form-control" name="Speciality" placeholder="Enter Speciality">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </fieldset>
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- +++++++++++++++++++++++++++++++++++doctor+++++++++++++++++++++++++++++ -->
+    <table style="border: 3px solid black; width: 80%;" class="table table-dark table-hover">
+    <tr style="text-align: center;">
+        <th>ID</th>
+        <th>Full Name </th>
+        <th>Work Day</th>
+        <th>Speciality</th>
+        <th>Remove</th>
+    </tr>
+    <% docter.forEach(function(d){ %>
+    <tr style="text-align: center;" >
+        <td ><%= d.idd %> </td>
+        <td ><%= d.nomd %></td>
+        <td ><%= d.days %></td>
+        <td ><%= d.spesialitai %></td>
+        <td><form action="/docter/<%=d.idd%>/delete" method="post"><input type="submit" value="X" class="btn btn-danger btn-sm"></form></td>
+    </tr>
+      <% }); %></table>
+      <!-- +++++++++++++++++++++++++++++pation++++++++++++++++++++++++++++++++ -->
+  <h1>List Of Patient </h1>
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="margin:20px 0;">
+  Add New Patient
+</button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <!-- ++++++++++++++++++++++++Formuler++++++++++++++++++++ -->
+          <form action="/insert2" method="post">
+              <fieldset>
+                <legend>Add New Patient</legend>
+                <div class="mb-3">
+                  <label for="disabledTextInput" class="form-label">Patient Full Name</label>
+                  <input type="text" id="disabledTextInput" class="form-control" name="fullnamep" placeholder="Enter Full Name">
+                </div>
+                <div class="mb-3">
+                    <label for="disabledTextInput" class="form-label">Age</label>
+                    <input type="text" id="disabledTextInput" class="form-control" name="agep" placeholder="Age">
+                  </div>
+                  <div class="mb-3">
+                    <label for="disabledSelect" class="form-label">la consultation</label>
+                        <select id="disabledSelect" class="form-select" name="blood">
+                          <option value="O+">O+</option>
+                          <option value="O-">O-</option>
+                          <option value="AB+">AB+</option>
+                          <option value="AB-">AB-</option>
+                          <option value="A+">A+</option>
+                          <option value="A-">A-</option>
+                          <option value="B+">B+</option>
+                          <option value="B-">B-</option>
+                    </select>
+                  </div>
+                
+                <div class="mb-3">
+                    <label for="disabledSelect" class="form-label">la consultation</label>
+                        <select id="disabledSelect" class="form-select" name="doctersp">
+                        <% docter.forEach(function(d){ %>
+                          <option value="<%=d.nomd%>"><%=d.nomd%></option>
+                          <% }); %>
+                    </select>
+                  </div>
+                
+                <div class="mb-3">
+                    <legend>Phone Numeber</legend>
+                  <label for="disabledTextInput" class="form-label"></label>
+                  <input type="text" id="disabledTextInput" class="form-control" name="phone">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </fieldset>
+            </form>
+      </div>
+    </div>
+  </div>
+</div>
+      <table style="border: 3px solid black; width: 80%;" class="table table-dark table-hover">
+        <tr style="text-align: center;">
+            <th>ID</th>
+            <th>Full Name </th>
+            <th>Age</th>
+            <th>Blood type</th>
+            <th>Docter</th>
+            <th>Phone Numeber</th>
+            <th>Remove</th>
+            <th>Modification</th>
+        </tr>
+        <% pation.forEach(function(f){ %>
+        <tr style="text-align: center;" >
+            <td><%= f.idp %> </td>
+            <td><%= f.patname %></td>
+            <td><%= f.age %></td>
+            <td><%= f.blood %></td>
+            <td><%= f.dasign %></td> 
+            <td><%= f.phone %></td>
+            <td><form action="/patient/<%=f.idp%>/delete2" method="post"><input type="submit" value="X" class="btn btn-danger btn-sm"></form></td>
+            <!-- =======================Edit========================== -->
+            <td><!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModaledit">
+                  Edit
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModaledit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body" style="color: black;">
+                        <h3 style="color: black;">UPDATE Data</h3>
+                        <form action="/patient/<%=f.idp%>/edit" method="post">
+                            <fieldset>
+                              <div class="mb-3">
+                                <label for="disabledTextInput" class="form-label">Patient Full Name</label>
+                                <input type="text" id="disabledTextInput" class="form-control" name="efullnamep" placeholder="Enter Full Name">
+                              </div>
+                              <div class="mb-3">
+                                  <label for="disabledTextInput" class="form-label">Age</label>
+                                  <input type="text" id="disabledTextInput" class="form-control" name="eagep" placeholder="Age">
+                                </div>
+                                <div class="mb-3">
+                                  <label for="disabledSelect" class="form-label">la consultation</label>
+                                      <select id="disabledSelect" class="form-select" name="eblood">
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                  </select>
+                                </div>
+                              
+                              <div class="mb-3">
+                                  <label for="disabledSelect" class="form-label">la consultation</label>
+                                      <select id="disabledSelect" class="form-select" name="edoctersp">
+                                      <% docter.forEach(function(d){ %>
+                                        <option value="<%=d.nomd%>"><%=d.nomd%></option>
+                                        <% }); %>
+                                  </select>
+                                </div>
+                              
+                                <div class="mb-3">
+                                    <legend for="disabledSelect" class="form-label" style="color: black;">Phone Numeber</legend>
+                                  <label for="disabledTextInput" class="form-label"></label>
+                                  <input type="text" id="disabledTextInput" class="form-control" name="ephone">
+                                </div>
+                              <button type="submit" class="btn btn-primary">Submit</button>
+                            </fieldset>
+                          </form>
+              
+                      </div>
+                    </div>
+                  </div>
+                </div></td>
+        </tr>
+          <% }); %></table>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+</body>
+</html>
